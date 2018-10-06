@@ -11,12 +11,12 @@
 
 
 extern "C" {
-	const int m = 512;
+	const int m = 256;
 	const int n = 200;
 
 	int mat[m + 1][m + 1];
 	const unsigned int M = 2;
-	const int color_kind = 8;
+	const int color_kind = 9;
 
 	mpf_t x_, y_, T, S;
 	// mpf_inits(x_,y_,T,S);
@@ -144,7 +144,7 @@ int main()
 		exit(EXIT_FAILURE);
 
 	GLFWwindow* window;
-	window = glfwCreateWindow(960, 720, "Mandelbrot Set", NULL, NULL);
+	window = glfwCreateWindow(512, 512, "Mandelbrot Set", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -191,25 +191,35 @@ int main()
 		glLineWidth(1.f);
 		glBegin(GL_LINE_STRIP);
 		glColor3f(1, 1, 1);
-		glVertex3f(-1.0f, 0, 0);
-		glVertex3f(1.0f, 0, 0);
+		glVertex2f(-1.0f, 0);
+		glVertex2f(1.0f, 0);
 		glEnd();
 
 		glBegin(GL_LINE_STRIP);
 		glColor3f(1, 1, 1);
-		glVertex3f(0, -1.0f, 0);
-		glVertex3f(0, 1.0f, 0);
+		glVertex2f(0, -1.0f);
+		glVertex2f(0, 1.0f);
 		glEnd();
+		/*
+		glBegin(GL_POINT);
+		glColor3f(1, 1, 1);
+		glPointSize(10.f);
+		glVertex2f(0.f, 0.f);
+		glEnd();*/
 		//
 		GLfloat x,y;
+		//glPointSize(0.01f);
 		glBegin(GL_POINTS);
 		for (int i = 0; i <= m; ++i) {
 			for (int j = 0; j <= m; j++) {
 				x = (1.0 - (2.0*j / m));
 				y = (1.0 - (2.0*i / m));
 				float col = (mat[i][j] % color_kind) * (1.f/color_kind);
-				glColor3f(col,col,1-col);
-			glVertex3f(x, y, 0.f);
+				if(mat[i][j]==0)
+					glColor3f(0, 0, 0.1f);
+				else
+					glColor3f(1-col,1-col,col);
+			glVertex2f(x, y);
 		}
 		}
 			
