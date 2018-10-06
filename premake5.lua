@@ -25,3 +25,4 @@ project "proj"
 		flags { "OptimizeSpeed" }
 		targetdir "bin/release"
 
+-- libgmp.dll.a;opengl32.lib;glu32.lib;glfw3.lib;

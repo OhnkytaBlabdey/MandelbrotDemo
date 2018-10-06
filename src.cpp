@@ -11,11 +11,12 @@
 
 
 extern "C" {
-	const unsigned int m = 256;
+	const int m = 512;
 	const int n = 200;
 
 	int mat[m + 1][m + 1];
-
+	const unsigned int M = 2;
+	const int color_kind = 8;
 
 	mpf_t x_, y_, T, S;
 	// mpf_inits(x_,y_,T,S);
@@ -86,10 +87,11 @@ extern "C" {
 		mpf_init(s);
 
 		// mpf_set_ui(t,m); // 最近的可表示数
-		mpf_set_ui(x, 1);
-		mpf_set_ui(y, 1);
+		//const unsigned int M = 2;
+		mpf_set_ui(x, M);
+		mpf_set_ui(y, M);
 		mpf_set_ui(dex, m / 2);
-		mpf_ui_div(dex, 1, dex);
+		mpf_ui_div(dex, M, dex);
 
 
 		for (int i = 0; i <= m; i++) {
@@ -133,29 +135,7 @@ extern "C" {
 	}
 }
 
-void func(mpf_t res, mpf_t x)
-{
-	int prec;
-	prec = mpf_get_prec(x);
-	if (prec < 2556)
-		prec = 256;
-	mpf_t t;
-	mpf_init2(t, prec);
-
-	if (prec < int(mpf_get_prec(res))) prec = mpf_get_prec(res);
-	mpf_set_prec(res, prec);
-
-	mpf_set(t, x);
-	mpf_set_ui(res, 0);
-
-	mpf_mul(t, x, x);
-	mpf_mul_ui(t, t, 2);
-	mpf_add(res, res, t);
-
-	mpf_add(res, res, x);
-	mpf_sub_ui(res, res, 1);
-	mpf_clear(t);
-}
+//GLfloat arr[m + 1][m + 1];
 
 int main()
 {
@@ -164,7 +144,7 @@ int main()
 		exit(EXIT_FAILURE);
 
 	GLFWwindow* window;
-	window = glfwCreateWindow(640, 480, "Simple GLFW Example", NULL, NULL);
+	window = glfwCreateWindow(960, 720, "Mandelbrot Set", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -173,13 +153,13 @@ int main()
 
 	//make sure that the context of the specified window is current on the calling thread
 	glfwMakeContextCurrent(window);
-	GLfloat arr[m+1][m+1];
+	//GLfloat arr[m+1][m+1];
 	init();
-	for (int i = 0; i <= m; i++) {
+	/*for (int i = 0; i <= m; i++) {
 		for (int j = 0; j <= m; j++) {
 			arr[i][j] = (float)mat[i][j] / n;
 		}
-	}
+	}*/
 
 	//Define a loop which terminates when the window is closed.
 	while (!glfwWindowShouldClose(window))
@@ -203,35 +183,33 @@ int main()
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+		//void glOrtho(GLdouble left,GLdouble right,GLdouble bottom,GLdouble top,GLdouble near,GLdouble far);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
 		//draw axis
-		glLineWidth(1.5f);
-		glBegin(GL_LINES);
+		glLineWidth(1.f);
+		glBegin(GL_LINE_STRIP);
 		glColor3f(1, 1, 1);
 		glVertex3f(-1.0f, 0, 0);
-		glColor3f(1, 1, 1);
 		glVertex3f(1.0f, 0, 0);
 		glEnd();
 
-		glBegin(GL_LINES);
+		glBegin(GL_LINE_STRIP);
 		glColor3f(1, 1, 1);
 		glVertex3f(0, -1.0f, 0);
-		glColor3f(1, 1, 1);
 		glVertex3f(0, 1.0f, 0);
 		glEnd();
 		//
 		GLfloat x,y;
-		glLineWidth(3.0f);
-		//glBegin(GL_LINE);
 		glBegin(GL_POINTS);
 		for (int i = 0; i <= m; ++i) {
 			for (int j = 0; j <= m; j++) {
-				x = 1.0 - (2.0*i / m);
-				y = 1.0 - (2.0*j / m);
-				glColor3f(arr[i][j], 1 - arr[i][j], 1 - arr[i][j]);
-			glVertex3f(y, x, 0);
+				x = (1.0 - (2.0*j / m));
+				y = (1.0 - (2.0*i / m));
+				float col = (mat[i][j] % color_kind) * (1.f/color_kind);
+				glColor3f(col,col,1-col);
+			glVertex3f(x, y, 0.f);
 		}
 		}
 			
