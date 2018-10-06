@@ -12,6 +12,7 @@
 
 extern "C" {
 	const unsigned int m = 256;
+	const int n = 200;
 
 	int mat[m + 1][m + 1];
 
@@ -101,7 +102,7 @@ extern "C" {
 				mpf_add(s, s, t);
 
 				// bool flag= (mpf_cmp_ui(s,1)>0);
-				int flag = escape(x, y, 200);
+				int flag = escape(x, y, n);
 				mat[i][j] = flag;
 				// if(!flag)
 				// gmp_printf("%.Ff\t%.Ff\t%s\t%d\t%d\n",y,x,flag>0?"Yes":"No",j+1,i+1);
@@ -156,7 +157,7 @@ void func(mpf_t res, mpf_t x)
 	mpf_clear(t);
 }
 
-int main(void)
+int main()
 {
 	//Initialize GLFW and create a GLFW window object (640 x 480).
 	if (!glfwInit())
@@ -174,7 +175,11 @@ int main(void)
 	glfwMakeContextCurrent(window);
 	GLfloat arr[m+1][m+1];
 	init();
-
+	for (int i = 0; i <= m; i++) {
+		for (int j = 0; j <= m; j++) {
+			arr[i][j] = (float)mat[i][j] / n;
+		}
+	}
 
 	//Define a loop which terminates when the window is closed.
 	while (!glfwWindowShouldClose(window))
@@ -225,8 +230,8 @@ int main(void)
 			for (int j = 0; j <= m; j++) {
 				x = 1.0 - (2.0*i / m);
 				y = 1.0 - (2.0*j / m);
-			glColor3f(1-mat[i][j]/200.0, 0.4f, 0.4f);
-			glVertex3f(x, y, 0);
+				glColor3f(arr[i][j], 1 - arr[i][j], 1 - arr[i][j]);
+			glVertex3f(y, x, 0);
 		}
 		}
 			
