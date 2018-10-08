@@ -71,7 +71,7 @@ extern "C" {
 		return N;
 	}
 
-
+	mpf_t x, y, dex, t, s, x0;
 	int init()
 	{
 		// mpf_inits(x_,y_,T,S);
@@ -79,23 +79,35 @@ extern "C" {
 		mpf_init(y_);
 		mpf_init(T);
 		mpf_init(S);
-		mpf_t x, y, dex, t, s;
+		
 		mpf_init(x);
 		mpf_init(y);
 		mpf_init(dex);
 		mpf_init(t);
 		mpf_init(s);
+		mpf_init(x0);
 
 		// mpf_set_ui(t,m); // 最近的可表示数
 		//const unsigned int M = 1;?? if M =2 the result is strange...
-		mpf_set_ui(x, M);
-		mpf_set_ui(y, M);
-		mpf_set_ui(dex, m / 2);
+		
+		mpf_set_d(x, 0.);
+		mpf_set_d(y, 0.);
+		mpf_set_d(dex, m / 2);
 		mpf_ui_div(dex, M, dex);
+		
+		//set x,y,D-width
+		//mpf_set_str(x, "0.2537269133080432",10);
+		//mpf_set_str(y, "0.000365995381749671135",10);
+		//mpf_set_str(dex, "0.0000000000000000945",10);
 
+		
+		mpf_add(x, x, dex);
+		mpf_add(y, y, dex);
+		mpf_set(x0, x);
+		mpf_div_ui(dex, dex, m / 2);
 
 		for (int i = 0; i <= m; i++) {
-			mpf_set_ui(x, 1);
+			mpf_set(x, x0);
 			for (int j = 0; j <= m; j++) {
 				mpf_set_ui(s, 0);
 				mpf_mul(t, x, x);
@@ -118,6 +130,7 @@ extern "C" {
 		mpf_clear(t);
 		mpf_clear(y);
 		mpf_clear(s);
+		mpf_clear(x0);
 
 		// mpf_clears(x_,y_,T,S);
 		mpf_clear(x_);
@@ -129,7 +142,8 @@ extern "C" {
 				printf("%03d ", mat[i][j]);
 			}
 			printf("\n");
-		}*/
+		}
+		*/
 
 		return 0;
 	}
