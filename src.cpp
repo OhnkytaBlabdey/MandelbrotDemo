@@ -92,8 +92,8 @@ extern "C" {
 		
 		mpf_set_d(x, 0.);
 		mpf_set_d(y, 0.);
-		mpf_set_d(dex, m / 2);
-		mpf_ui_div(dex, M, dex);
+		//mpf_set_d(dex, m / 2);
+		mpf_set_ui(dex, M);
 		
 		//set x,y,D-width
 		//mpf_set_str(x, "0.2537269133080432",10);
