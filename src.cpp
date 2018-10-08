@@ -12,10 +12,10 @@
 
 extern "C" {
 	const int m = 256;
-	const int n = 200;
+	const int n = 100;
 
 	int mat[m + 1][m + 1];
-	const unsigned int M = 2;
+	const unsigned int M = 1;
 	const int color_kind = 9;
 
 	mpf_t x_, y_, T, S;
@@ -87,7 +87,7 @@ extern "C" {
 		mpf_init(s);
 
 		// mpf_set_ui(t,m); // 最近的可表示数
-		//const unsigned int M = 2;
+		//const unsigned int M = 1;?? if M =2 the result is strange...
 		mpf_set_ui(x, M);
 		mpf_set_ui(y, M);
 		mpf_set_ui(dex, m / 2);
@@ -182,24 +182,24 @@ int main()
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+		glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, 1.f);
 		//void glOrtho(GLdouble left,GLdouble right,GLdouble bottom,GLdouble top,GLdouble near,GLdouble far);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
 		//draw axis
-		glLineWidth(1.f);
-		glBegin(GL_LINE_STRIP);
+		/*glLineWidth(1.f);
+		glBegin(GL_LINE);
 		glColor3f(1, 1, 1);
 		glVertex2f(-1.0f, 0);
 		glVertex2f(1.0f, 0);
 		glEnd();
 
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE);
 		glColor3f(1, 1, 1);
 		glVertex2f(0, -1.0f);
 		glVertex2f(0, 1.0f);
-		glEnd();
+		glEnd();*/
 		/*
 		glBegin(GL_POINT);
 		glColor3f(1, 1, 1);
