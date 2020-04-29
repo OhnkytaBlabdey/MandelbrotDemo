@@ -8,18 +8,18 @@
 //const unsigned int m=256;
 #include <stdio.h>
 #include <gmp.h>
-
+#pragma comment(lib, "libgmp.dll.a")
 
 extern "C" {
-	const int m = 512;
-	const int n = 500;
+	const int m = 256;
+	const int n = 128;
 
 	int mat[m + 1][m + 1];
 	const unsigned int M = 2;
 	const int color_kind = 9;
 
 	mpf_t x_, y_, T, S;
-	// mpf_inits(x_,y_,T,S);
+	// mpf_inits(x_,y_,T,S,NULL);
 	short escape(mpf_t X, mpf_t Y, int N)
 	{
 		// mpf_t x_,y_,T,S;
@@ -167,7 +167,7 @@ int main()
 		exit(EXIT_FAILURE);
 
 	GLFWwindow* window;
-	window = glfwCreateWindow(512, 512, "Mandelbrot Set", NULL, NULL);
+	window = glfwCreateWindow(m, m, "Mandelbrot Set", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
