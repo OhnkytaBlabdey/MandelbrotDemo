@@ -4,6 +4,7 @@
 #include <gmpxx.h>
 #include "config.h"
 #include "data.h"
+#include "key.h"
 using namespace std;
 
 int main()
@@ -23,6 +24,7 @@ int main()
 	}
 	glfwMakeContextCurrent(window);
 	data::init();
+	glfwSetKeyCallback(window, key_callback);
 	while (!glfwWindowShouldClose(window))
 	{
 		float ratio;

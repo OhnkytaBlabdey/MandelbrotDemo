@@ -1,4 +1,4 @@
-SRCS := src/entry.cpp src/data.cpp
+SRCS := src/entry.cpp src/key.cpp src/data.cpp
 OBJS := $(SRCS:src/%.cpp=%.o)
 LIBS := -lgmp -lgmpxx -lglu32 -lopengl32 -lglfw3dll
 IDIR := -I$(GLFW)\include -I$(GMP)
