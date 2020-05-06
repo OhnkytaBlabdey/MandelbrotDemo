@@ -1,4 +1,5 @@
-SRCS := src/entry.cpp
+SRCS := src/entry.cpp src/data.cpp
+OBJS := $(SRCS:src/%.cpp=%.o)
 LIBS := -lgmp -lgmpxx -lglu32 -lopengl32 -lglfw3dll
 IDIR := -I$(GLFW)\include -I$(GMP)
 LDIR := -L$(GLFW)\lib-mingw-w64
@@ -12,7 +13,7 @@ compile:$(SRCS)
 link:compile
 	@echo "link starting ..."
 	@echo external included : $(LDIR)
-	ld -o $(NAME) $(LDIR) $(LIBS)
+	g++ -o $(NAME) $(OBJS) $(LDIR) $(LIBS)
 	@echo link completed
 test:
 	@echo "This is a test"
@@ -21,7 +22,7 @@ clean:
 all:
 	@echo "Build starting ..."
 	@echo external included $(IDIR) , $(LDIR)
-	g++ -o $(NAME) -Wall -O2 $(SRCS) $(IDIR) $(LDIR) $(LIBS)
-	# make link
+	# g++ -o $(NAME) -Wall -O2 $(SRCS) $(IDIR) $(LDIR) $(LIBS)
+	make link
 	# make test
 	@echo "Build completed."
