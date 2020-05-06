@@ -33,7 +33,7 @@ inline void validate(short i, short j)
 	mpf_class X = xCenter + x * ratio,
 			  Y = yCenter + y * ratio;
 	points[i][j].escaped = escape(X, Y, config::maxEscapeCount);
-	if ((i == 0 || (config::pixelWidth % i == 0 && (config::pixelWidth / i) % 4 == 0)) && (j == 0 || (config::pixelWidth % j == 0 && (config::pixelWidth / j) % 4 == 0)))
+	if ((i == 0 || (config::pixelWidth % i == 0 && (config::pixelWidth / i) % 32 == 0)) && (j == 0 || (config::pixelWidth % j == 0 && (config::pixelWidth / j) % 32 == 0)))
 	{
 		printf("(%d %d) (%f, %f) - (%lf, %lf):%d\n", i, j, x, y, X.get_d(), Y.get_d(), points[i][j].escaped);
 	}

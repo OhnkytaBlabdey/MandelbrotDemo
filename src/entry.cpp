@@ -52,9 +52,11 @@ int main()
 				p = &data::points[i][j];
 				float col = data::color(i, j);
 				if (p->escaped == config::maxEscapeCount)
-					glColor3f(1, 0.1f, 0.1f);
+					glColor3f(0.1f, 0.1f, 0.1f);
 				else
-					glColor3f(1 - col, 1 - col, col);
+					glColor4f(
+						(1 - col), (col * col), col,
+						((float)p->escaped) / config::maxEscapeCount);
 				glVertex2f(p->x, p->y);
 			}
 		}
