@@ -13,7 +13,7 @@
     {
       "label": "Run",
       "type": "shell",
-      "command": "mandelbrot_demo",
+      "command": "./mandelbrot_demo",
       "group": "test",
       "options": {
         "cwd": "${fileDirname}"
