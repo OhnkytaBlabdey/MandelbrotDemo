@@ -4,8 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${gmp}",
-                "${glfw}/include"
+                "${GMP}",
+                "${GLFW}/include"
             ],
             "defines": [
                 "_DEBUG",

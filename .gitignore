@@ -7,3 +7,4 @@ obj
 *.exe
 *.o
 *.stackdump
+mandelbrot_demo
