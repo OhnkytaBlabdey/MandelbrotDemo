@@ -5,8 +5,8 @@ OBJS := $(SRCS:src/%.cpp=%.o)
 ifeq ($(UNAME), Linux)
 LIBS := -lgmp -lgmpxx -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXxf86vm -lXinerama -lXcursor -lXi -ldl
 NAME := mandelbrot_demo
-endif
-ifeq ($(UNAME), Solaris)
+else
+# for cygwin
 LIBS := -lgmp -lgmpxx -lglu32 -lopengl32 -lglfw3dll
 NAME := mandelbrot_demo.exe
 endif

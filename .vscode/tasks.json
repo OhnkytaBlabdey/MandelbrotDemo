@@ -11,13 +11,21 @@
       "problemMatcher": ["$gcc"]
     },
     {
-      "label": "Run",
+      "label": "Run on Linux",
       "type": "shell",
       "command": "./mandelbrot_demo",
       "group": "test",
       "options": {
         "cwd": "${fileDirname}"
       }
-    }
+    },{
+      "label": "Run on cygwin",
+      "type": "shell",
+      "command": "mandelbrot_demo",
+      "group": "test",
+      "options": {
+        "cwd": "${fileDirname}"
+      }
+    },
   ]
 }
