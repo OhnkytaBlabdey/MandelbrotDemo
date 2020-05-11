@@ -1,9 +1,19 @@
+UNAME := $(shell uname)
+
 SRCS := src/entry.cpp src/key.cpp src/data.cpp
 OBJS := $(SRCS:src/%.cpp=%.o)
+ifeq ($(UNAME), Linux)
+LIBS := -lgmp -lgmpxx -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXxf86vm -lXinerama -lXcursor -lXi -ldl
+NAME := mandelbrot_demo
+endif
+ifeq ($(UNAME), Solaris)
 LIBS := -lgmp -lgmpxx -lglu32 -lopengl32 -lglfw3dll
+NAME := mandelbrot_demo.exe
+endif
+
 IDIR := -I$(GLFW)\include -I$(GMP)
 LDIR := -L$(GLFW)\lib-mingw-w64
-NAME := mandelbrot_demo.exe
+
 
 compile:$(SRCS)
 	@echo "compile starting ..."
