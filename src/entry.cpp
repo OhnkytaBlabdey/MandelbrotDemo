@@ -23,6 +23,18 @@ int main()
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
+	// 启用阴影平滑
+	glShadeModel(GL_SMOOTH);
+	// 黑色背景
+	// glClearColor(0.0, 0.0, 0.0, 0.0);
+	// 设置深度缓存
+	// glClearDepth(1.0);
+	// 启用深度测试
+	// glEnable(GL_DEPTH_TEST);
+	// 所作深度测试的类型
+	// glDepthFunc(GL_LEQUAL);
+	// 告诉系统对透视进行修正
+	// glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	data::init();
 	glfwSetKeyCallback(window, key_callback);
 	while (!glfwWindowShouldClose(window))
@@ -45,7 +57,11 @@ int main()
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
+		// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// glLoadIdentity(); // Reset The View
+		// glTranslatef(0.0f, 0.0f, -2.0f);
 		glBegin(GL_POINTS);
+		glPointSize(2.0);
 		data::point *p;
 		for (int i = 0; i < config::pixelWidth; ++i)
 		{
@@ -57,7 +73,7 @@ int main()
 					glColor3f(0.1f, 0.1f, 0.1f);
 				else
 					glColor4f(
-						(1 - col), (col * col), col,
+						(1 - col), (col - 0.5) * (col - 0.5) + 0.5, col,
 						((float)p->escaped) / config::maxEscapeCount);
 				glVertex2f(p->x, p->y);
 			}

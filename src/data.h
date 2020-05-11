@@ -12,7 +12,7 @@ typedef struct
 extern point points[][config::pixelWidth];
 extern void init();
 extern float color(short, short);
-extern GLfloat xCenter,
+extern mpf_class xCenter,
 	yCenter,
 	ratio;
 } // namespace data

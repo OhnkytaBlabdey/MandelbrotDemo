@@ -2,9 +2,9 @@
 namespace data
 {
 point points[config::pixelWidth][config::pixelWidth];
-GLfloat xCenter = 0.f,
-		yCenter = 0.f,
-		ratio = 2.f;
+mpf_class xCenter = 0.f,
+		  yCenter = 0.f,
+		  ratio = 2.f;
 inline short escape(mpf_class x, mpf_class y, short time)
 {
 	mpf_class z_x = 0, z_y = 0;
