@@ -1,4 +1,4 @@
-Test only passed on win10 x64.
+Test only passed on win10 x64 and some of Linux that support GLFW lib.
 
 ![image-20200506120107811](README.assets/image-20200506120107811.png)
 
